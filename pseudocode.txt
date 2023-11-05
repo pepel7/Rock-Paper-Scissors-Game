@@ -1,0 +1,46 @@
+SET computerSelection to null
+SET playerSelection to null
+SET userVictoryCount to null
+SET computerVictoryCount to null
+
+SET function getUserChoise
+  CHANGE playerSelection to promt "Your choise is?" and immediately convert this to lower case
+  RETURN playerSelection
+SET function END
+
+SET function getComputerChoise
+  CHANGE computerSelection to "rock" OR "paper" OR "scissors"
+  RETURN computerSelection
+SET function END
+
+
+SET function playRound with getComputerChoise and getUserChoise
+  SET userVictory
+
+  IF playerSelection is "rock" AND computerSelection is "scissors" THEN
+    userVictory is true
+  ELSE IF playerSelection is "scissors" AND computerSelection is "paper" THEN
+    userVictory is true
+  ELSE IF playerSelection is "paper" AND computerSelection is "rock" THEN
+    userVictory is true
+  ELSE
+    userVictory is false
+  END IF
+
+  IF userVictory is true THEN
+    Increase userVictoryCount by 1
+  ELSE
+    Increase computerVictoryCount by 1
+  END IF
+
+  PRINT `You have ${userVictoryCount} wins for now!`
+SET function END
+
+
+SET function game
+  RUN playRound 5 times
+  IF userVictoryCount > computerVictoryCount THEN
+    PRINT "You won the game!"
+  ELSE
+    PRINT  "You lost the game."
+SET function END
