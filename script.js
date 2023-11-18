@@ -3,11 +3,34 @@ let computerSelection = null;
 let userVictoryCount = 0;
 let computerVictoryCount = 0;
 let roundNumber = 0;
+let winner = null;
 
-function getUserChoise() {
-    userSelection = prompt("What's your choise?").toLowerCase();
-    return userSelection;
-}
+const scoreCounter = document.querySelector('.score-counter');
+scoreCounter.textContent = `${userVictoryCount}:${computerVictoryCount}`
+
+const buttons = document.querySelectorAll('button')
+const gameResult = document.querySelector('.game-result');
+const img = document.createElement('img')
+const imgContainer = document.querySelector('.selection-image')
+
+buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        userSelection = btn.id;
+        img.src = `images/${userSelection}.png`;
+        imgContainer.appendChild(img);
+
+        playRound();
+        scoreCounter.textContent = `${userVictoryCount}:${computerVictoryCount}`
+        getWinner();
+        if(winner) {
+            gameResult.textContent = `The winner is ${winner}`;
+            buttons.forEach((btn) => btn.disabled = true);
+            if(winner == 'You') img.src = `images/win.png`;
+            else img.src = `images/loss.png`;
+        }
+    });
+    
+});
 
 function getComputerChoise() {
     computerSelection = ["rock", "paper", "scissors"];
@@ -18,7 +41,6 @@ function getComputerChoise() {
 
 function playRound() {
     getComputerChoise();
-    getUserChoise() ;
     let userVictory;
     if(userSelection === "rock" && computerSelection === "scissors") {
         userVictory = true;
@@ -35,7 +57,7 @@ function playRound() {
     } else {
         computerVictoryCount++;
     }
-                
+
     roundNumber++;
     // for correct singular and plural
     if(userVictoryCount === 1) {
@@ -45,17 +67,7 @@ function playRound() {
     }
 }
 
-function game() {
-    playRound();
-    playRound();
-    playRound();
-    playRound();
-    playRound();
-    if (userVictoryCount > computerVictoryCount) {
-        console.log("You won the game!")
-    } else {
-        console.log("You lost the game.")
-    }
+function getWinner() {
+    if(userVictoryCount === 5) winner = 'You';
+    if((computerVictoryCount === 5)) winner = 'Mr. PC';
 }
-
-game()
