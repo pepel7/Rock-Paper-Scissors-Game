@@ -3,64 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Rock Paper Scissors Game Online</title>
+        <script src="script.js" defer></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <script>
-            let playerSelection = null;
-            let computerSelection = null;
-            let userVictoryCount = 0;
-            let computerVictoryCount = 0;
-            let roundNumber = 0;
-
-            function getUserChoise() {
-                playerSelection = prompt("What's your choise?").toLowerCase();
-                return playerSelection;
-            }
-
-            function getComputerChoise() {
-                // create an array and get a random choice from it (i did it with google. tbh i don't know how it works...)
-                computerSelection = ["rock", "paper", "scissors"];
-                index = (Math.floor(Math.random() * computerSelection.length));
-                return computerSelection = computerSelection[index];
-            }
-
-            function playRound(getComputerChoise, getUserChoise) {
-                let userVictory;
-                if(playerSelection === "rock" && computerSelection === "scissors") {
-                    userVictory = true;
-                } else if(playerSelection === "scissors" && computerSelection === "paper") {
-                    userVictory = true;
-                } else if(playerSelection === "paper" && computerSelection === "rock") {
-                    userVictory = true;
-                } else {
-                    userVictory = false;
-                }
-
-                if(userVictory === true) {
-                    ++userVictoryCount;
-                } else {
-                    ++computerVictoryCount;
-                }
-                
-                ++roundNumber;
-                console.log(`Round ${roundNumber}: You have ${userVictoryCount} wins now!`)
-            }
-
-            function game() {
-                playRound(getComputerChoise(), getUserChoise());
-                playRound(getComputerChoise(), getUserChoise());
-                playRound(getComputerChoise(), getUserChoise());
-                playRound(getComputerChoise(), getUserChoise());
-                playRound(getComputerChoise(), getUserChoise());
-                if (userVictoryCount > computerVictoryCount) {
-                    console.log("You won the game!")
-                } else {
-                    console.log("You lost the game.")
-                }
-            }
-
-            game()
-
-        </script>
+        
     </body>
 </html>
